@@ -20,15 +20,15 @@ class Home extends React.Component<> {
         <div style={{ padding: 10 }} />
         <Menu theme="dark" mode="inline" className="menu-container">
           <IndexLink to="/searchBlock" activeClassName="active" className="menu">
-            <Icon type="file-search" theme="outlined" />
+            <Icon type="file-search" theme="outlined" style={{ margin: 5 }}/>
             <span className="nav-text">区块查询</span>
           </IndexLink>
           <IndexLink to="/searchTransaction" activeClassName="active" className="menu">
-            <Icon type="dollar" theme="outlined" />
+            <Icon type="dollar" theme="outlined" style={{ margin: 5 }}/>
             <span className="nav-text">交易查询</span>
           </IndexLink>
           <IndexLink to="/statistics" activeClassName="active" className="menu">
-            <Icon type="line-chart" />
+            <Icon type="line-chart" style={{ margin: 5 }}/>
             <span className="nav-text">统计分析</span>
           </IndexLink>
         </Menu>
