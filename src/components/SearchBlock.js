@@ -1,33 +1,49 @@
-import { Input, Table, Spin } from 'antd';
+import { Input, Table } from 'antd';
 import * as React from 'react';
 import Web3 from 'web3';
 const Search = Input.Search;
 
-
-class BlockTable extends Table<> {}
-class BlockColumn extends Table.Column<> {}
-
-// const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 
 class SearchBlock extends React.Component<> {
   constructor(props) {
     super(props);
     this.state = {
-      block_ids: [],
-      block_hashes: [],
-      curr_block: null
+      loading: true,
+      blocks: [],
+      currentBlock: null,
+      searchBlock: null
     };
 
   }
 
-  componentWillMount() {
-    console.log("aaaa");
-    // console.log(web3.eth.accounts);
-    // let curr_block_no = web3.eth.blockNumber;
-    // console.log(curr_block_no);
-    // this.setState({
-    //   curr_block: curr_block_no
-    // });
+  async componentWillMount() {
+    let currentBlockNumber = 0;
+    await web3.eth.getBlockNumber()
+      .then(res => currentBlockNumber = res)
+      .catch(e => console.error(e));
+    console.log(currentBlockNumber);
+    this.setState({
+      currentBlock: currentBlockNumber
+    });
+    this.getBlocks(currentBlockNumber);
+  }
+
+  async getBlocks(currentBlockNumber) {
+    const blocks = this.state.blocks.slice();
+    let maxBlocks = currentBlockNumber;
+    let currentBlockObject;
+    for (let i = 0; i < maxBlocks; i++, currentBlockNumber--) {
+      await web3.eth.getBlock(currentBlockNumber)
+        .then(res => currentBlockObject = res);
+      console.log(currentBlockObject);
+      blocks.push(currentBlockObject);
+    }
+    this.setState({
+      blocks: blocks,
+      loading: false
+    });
+
   }
 
   render() {
@@ -45,15 +61,14 @@ class SearchBlock extends React.Component<> {
           </div>
         </div>
         <div style={{position: 'relative'}}>
-          <BlockTable dataSource={this.state.blocks} loading={this.state.searching}>
-            <BlockColumn dataIndex="height" title="单位"/>
-            <BlockColumn dataIndex="hash" title="姓名"/>
-            <BlockColumn dataIndex="timestamp" title="院系"/>
-            <BlockColumn dataIndex="title" title="职务/职称"/>
-            <BlockColumn dataIndex="miner" title="电话"/>
-            <BlockColumn dataIndex="transactions" title="邮箱"/>
-            <BlockColumn dataIndex="extraData" title="地址"/>
-          </BlockTable>
+          <Table dataSource={this.state.blocks} loading={this.state.loading} >
+            <Table.Column dataIndex="number" title="区块号"/>
+            <Table.Column dataIndex="size" title="块大小"/>
+            <Table.Column dataIndex="hash" title="区块哈希"/>
+            <Table.Column dataIndex="timestamp" title="时间戳"/>
+            <Table.Column dataIndex="difficulty" title="难度"/>
+            <Table.Column dataIndex="nonce" title="Nonce"/>
+          </Table>
         </div>
       </div>
     );
