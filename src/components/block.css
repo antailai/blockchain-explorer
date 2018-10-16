@@ -1,0 +1,23 @@
+.select-container {
+  margin: 16px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.select-container > div > span {
+  font-weight: bolder;
+  margin-right: 8px;
+}
+
+.import-container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.name {
+  background: black;
+  padding: 8px;
+  font-weight: border;
+  color: white;
+  margin: 0 8px;
+}

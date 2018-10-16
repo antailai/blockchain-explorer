@@ -1,0 +1,40 @@
+.logo {
+  height: 32px;
+  margin: 16px;
+  margin-top: 21px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Microsoft YaHei', sans-serif;
+  font-size: 18px;
+  text-align: left;
+  color: #eaeaea;
+}
+.user-logout {
+  float: right;
+  width: 100px;
+  margin-top: 8px;
+  margin-right: 32px;
+}
+.ant-layout-header {
+  height: 58px!important;
+}
+
+.active {
+  background: #1890ff;
+  color: white;
+}
+
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu {
+  font-size: 16px;
+  padding: 16px;
+  color: white;
+  width: 100%;
+}
+
+.menu i {
+  margin: 0 8px;
+}
