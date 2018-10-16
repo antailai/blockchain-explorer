@@ -1,4 +1,4 @@
-import { Input, Table, Spin, Button } from 'antd';
+import { Input, Table, Spin } from 'antd';
 import * as React from 'react';
 import Web3 from 'web3';
 const Search = Input.Search;
@@ -7,33 +7,30 @@ const Search = Input.Search;
 class BlockTable extends Table<> {}
 class BlockColumn extends Table.Column<> {}
 
-const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+// const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 
 class SearchBlock extends React.Component<> {
   constructor(props) {
     super(props);
     this.state = {
-      searching: false,
-      loading: true,
       block_ids: [],
       block_hashes: [],
       curr_block: null
     };
+
   }
-  
+
   componentWillMount() {
-    console.log(web3.eth.accounts);
-    let curr_block_no = web3.eth.blockNumber;
-    console.log(curr_block_no);
-    this.setState({
-      curr_block: curr_block_no
-    });
+    console.log("aaaa");
+    // console.log(web3.eth.accounts);
+    // let curr_block_no = web3.eth.blockNumber;
+    // console.log(curr_block_no);
+    // this.setState({
+    //   curr_block: curr_block_no
+    // });
   }
 
   render() {
-    if (this.state.loading) {
-      return <Spin size="large"/>;
-    }
     return (
       <div>
         <div style={{ background: '#fff', padding: 0 }}>
@@ -60,10 +57,6 @@ class SearchBlock extends React.Component<> {
         </div>
       </div>
     );
-  }
-
-  onSearch = (keyword) => {
-
   }
 }
 

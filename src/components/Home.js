@@ -1,14 +1,11 @@
 import { Icon, Layout, Menu } from 'antd';
 import * as React from 'react';
-import { NavLink } from 'react-router-dom'
-import './home.css';
+import { IndexLink } from 'react-router';
+import './Home.css';
+
 const { Header, Content, Footer, Sider } = Layout;
 
 class Home extends React.Component<> {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
     <Layout style={{minHeight: '100vh'}}>
@@ -22,18 +19,18 @@ class Home extends React.Component<> {
         </div>
         <div style={{ padding: 10 }} />
         <Menu theme="dark" mode="inline" className="menu-container">
-            <NavLink exact to="/searchBlock" activeClassName="active" className="menu">
-              <Icon type="file-search" theme="outlined" />
-              <span className="nav-text">区块查询</span>
-            </NavLink>
-            <NavLink exact to="/searchTransaction" activeClassName="active" className="menu">
-              <Icon type="dollar" theme="outlined" />
-              <span className="nav-text">交易查询</span>
-            </NavLink>
-            <NavLink exact to="/statistics" activeClassName="active" className="menu">
-              <Icon type="line-chart" />
-              <span className="nav-text">统计分析</span>
-            </NavLink>
+          <IndexLink to="/searchBlock" activeClassName="active" className="menu">
+            <Icon type="file-search" theme="outlined" />
+            <span className="nav-text">区块查询</span>
+          </IndexLink>
+          <IndexLink to="/searchTransaction" activeClassName="active" className="menu">
+            <Icon type="dollar" theme="outlined" />
+            <span className="nav-text">交易查询</span>
+          </IndexLink>
+          <IndexLink to="/statistics" activeClassName="active" className="menu">
+            <Icon type="line-chart" />
+            <span className="nav-text">统计分析</span>
+          </IndexLink>
         </Menu>
       </Sider>
       <Layout>
