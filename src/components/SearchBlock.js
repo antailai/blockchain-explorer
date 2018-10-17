@@ -12,7 +12,6 @@ class SearchBlock extends React.Component<> {
       loading: true,
       blocks: [],
       currentBlock: null,
-      searchBlock: null
     };
 
   }
@@ -23,9 +22,6 @@ class SearchBlock extends React.Component<> {
       .then(res => currentBlockNumber = res)
       .catch(e => console.error(e));
     console.log(currentBlockNumber);
-    this.setState({
-      currentBlock: currentBlockNumber
-    });
     this.getBlocks(currentBlockNumber);
   }
 
@@ -52,7 +48,7 @@ class SearchBlock extends React.Component<> {
         <div style={{ background: '#fff', padding: 0 }}>
           <div>
             <Search
-              placeholder="Input block ID or block hash"
+              placeholder="请输入区块ID或区块哈希"
               onSearch={this.onSearch}
               enterButton={true}
               size="large"
@@ -73,6 +69,24 @@ class SearchBlock extends React.Component<> {
       </div>
     );
   }
+
+  onSearch = async (keyword) => {
+    this.setState ({
+      loading: true,
+      blocks: []
+    });
+    console.log(keyword);
+    await web3.eth.getBlock(keyword)
+      .then (res => this.state.currentBlock = res);
+    console.log(this.state.currentBlock);
+    let searchBlock = [];
+    searchBlock.push(this.state.currentBlock);
+    this.setState ({
+      blocks: searchBlock,
+      loading: false
+    });
+
+  };
 }
 
 export default SearchBlock;

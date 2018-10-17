@@ -45,7 +45,7 @@ class SearchTransaction extends React.Component {
         <div style={{ background: '#fff', padding: 0 }}>
           <div>
             <Search
-              placeholder="Input block ID or block hash"
+              placeholder="请输入交易账户"
               onSearch={this.onSearch}
               enterButton={true}
               size="large"
